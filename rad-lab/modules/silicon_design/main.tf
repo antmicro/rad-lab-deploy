@@ -270,7 +270,9 @@ resource "google_notebooks_instance" "ai_notebook" {
   metadata = {
     terraform  = "true"
     proxy-mode = "service_account"
+    startup-script-url = "gs://${google_storage_bucket.staging_bucket.name}/copy-notebooks.sh"
   }
+
   depends_on = [
     time_sleep.wait_120_seconds,
     null_resource.build_and_push_image,
